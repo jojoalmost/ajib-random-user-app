@@ -1,5 +1,5 @@
 import {COLUMNS_NAME, SORT_ORDER} from "../../../utils/types";
-import Button from "../../../components/button/Button";
+import Button from "../../../components/button";
 import React from "react";
 import styled from "styled-components";
 import useSortableData from "../../../utils/hooks/useSortableData";

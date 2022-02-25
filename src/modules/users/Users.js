@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useState} from "react";
 import api from "../../utils/api/api";
 import {reformatUserData} from "../../utils/helper";
@@ -53,7 +54,7 @@ const Users = () => {
     }
 
     const handleChangeSearch = (search = '') => {
-        if (search.trim()) {
+        if (search.trim() !== '') {
             setIsLoading(true);
             const key = search.toLowerCase();
             const filter = usersTemp.filter(user => String(user.username).toLowerCase().indexOf(key) !== -1 ||

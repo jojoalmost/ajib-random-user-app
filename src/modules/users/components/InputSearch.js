@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../components/button/Button";
-import Input from "../../../components/Input";
+import Button from "../../../components/button";
+import Input from "../../../components/input";
 import styled from "styled-components";
 
 const InputSearch = ({onChange}) => {

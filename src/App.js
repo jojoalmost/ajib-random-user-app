@@ -1,7 +1,6 @@
 import './App.css';
 import React from "react";
-import Header from "./components/layout/Header";
-import MainContent from "./components/layout/MainContent";
+import {Header, MainContent} from "./components/layout";
 
 function App() {
     const Users = React.lazy(() => import("./modules/users/Users"));
