@@ -13,7 +13,7 @@ const Table = () => {
     const isSort = (key) => key ? sortBy === key : false;
     const headers = [COLUMNS_NAME.USERNAME, COLUMNS_NAME.NAME, COLUMNS_NAME.EMAIL, COLUMNS_NAME.GENDER, COLUMNS_NAME.REGISTERED];
 
-    const isSearching = !!search.trim();
+    const isSearching = search.trim().length === 0;
     return (
         <TableWrapper>
             <thead>
