@@ -33,7 +33,6 @@ const Users = () => {
                 setUsers(reformatUsers);
                 setUsersTemp(reformatUsers);
                 setInfo(info);
-                setPage(info.page);
             }
         ).finally(() => {
             setIsLoading(false);
@@ -77,6 +76,7 @@ const Users = () => {
                     data={users}
                     changePage={(to) => setPage(to)}
                     isLoading={isLoading}
+                    isSearching={!!search.trim()}
                 />
             </div>
         </div>

@@ -13,12 +13,6 @@ api.interceptors.response.use(
         return response.data;
     },
     error => {
-        if (error.response) {
-            if (error.response.status === 404) {
-                // window.location.href = '/404';
-            }
-            return Promise.reject(error);
-        }
         return Promise.reject(error);
     }
 );

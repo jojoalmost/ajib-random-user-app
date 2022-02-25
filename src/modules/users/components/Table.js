@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useSortableData from "../../../utils/hooks/useSortableData";
 import {formatDate} from "../../../utils/helper";
 
-const Table = ({isLoading, data: users, page, changePage}) => {
+const Table = ({isLoading, data: users, page, changePage, isSearching}) => {
     const {data, requestSort: onSort, sortBy, sortDirection} = useSortableData(users);
     const isSort = (key) => key ? sortBy === key : false;
     const headers = [COLUMNS_NAME.USERNAME, COLUMNS_NAME.NAME, COLUMNS_NAME.EMAIL, COLUMNS_NAME.GENDER, COLUMNS_NAME.REGISTERED];
@@ -66,10 +66,10 @@ const Table = ({isLoading, data: users, page, changePage}) => {
                 </td>
                 <td className="action">
                     <Button onClick={() => changePage(page - 1)}
-                            disabled={page === 1 || users.length === 0}>
+                            disabled={page === 1 || users.length === 0 || isSearching}>
                         Prev
                     </Button>
-                    <Button onClick={() => changePage(page + 1)} disabled={users.length === 0}>
+                    <Button onClick={() => changePage(page + 1)} disabled={users.length === 0 || isSearching}>
                         Next
                     </Button>
                 </td>
