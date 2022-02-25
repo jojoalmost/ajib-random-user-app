@@ -13,7 +13,7 @@ const Table = () => {
     const isSort = (key) => key ? sortBy === key : false;
     const headers = [COLUMNS_NAME.USERNAME, COLUMNS_NAME.NAME, COLUMNS_NAME.EMAIL, COLUMNS_NAME.GENDER, COLUMNS_NAME.REGISTERED];
 
-    const isSearching = search.trim().length === 0;
+    const disablePagination = users.length === 0 && search.trim().length > 0;
     return (
         <TableWrapper>
             <thead>
@@ -57,7 +57,7 @@ const Table = () => {
                     </tr>
                 )) : (
                     <tr>
-                        <td colSpan={5} className="center">No row match</td>
+                        <td colSpan={5} className="center">No row match with <i>{search}</i></td>
                     </tr>
                 )}
                 </tbody>
@@ -71,10 +71,10 @@ const Table = () => {
                 </td>
                 <td className="action">
                     <Button onClick={() => onChangePage(page - 1)}
-                            disabled={page === 1 || users.length === 0 || isSearching}>
+                            disabled={page === 1 || users.length === 0 || disablePagination}>
                         Prev
                     </Button>
-                    <Button onClick={() => onChangePage(page + 1)} disabled={users.length === 0 || isSearching}>
+                    <Button onClick={() => onChangePage(page + 1)} disabled={users.length === 0 || disablePagination}>
                         Next
                     </Button>
                 </td>
