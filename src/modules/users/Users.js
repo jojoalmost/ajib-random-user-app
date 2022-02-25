@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, {useState} from "react";
 import api from "../../utils/api/api";
-import {reformatUserData} from "../../utils/helper";
+import {filterUserData, reformatUserData} from "../../utils/helper";
 import {Filter, Table} from "./components";
 
 const Users = () => {
@@ -28,13 +28,14 @@ const Users = () => {
                 ...(search && {query: search}),
             }
         }).then(res => {
-            const {results, info} = res;
-            const reformatUsers = reformatUserData(results);
-            setUsers(reformatUsers);
-            setUsersTemp(reformatUsers);
-            setInfo(info);
-            setPage(info.page);
-        }).finally(() => {
+                const {results, info} = res;
+                const reformatUsers = reformatUserData(results);
+                setUsers(reformatUsers);
+                setUsersTemp(reformatUsers);
+                setInfo(info);
+                setPage(info.page);
+            }
+        ).finally(() => {
             setIsLoading(false);
         });
     }
@@ -56,13 +57,11 @@ const Users = () => {
     const handleChangeSearch = (search = '') => {
         if (search.trim() !== '') {
             setIsLoading(true);
-            const key = search.toLowerCase();
-            const filter = usersTemp.filter(user => String(user.username).toLowerCase().indexOf(key) !== -1 ||
-                String(user.name).toLowerCase().indexOf(key) !== -1 ||
-                String(user.email).toLowerCase().indexOf(key) !== -1);
+            const filter = filterUserData(search, usersTemp);
             setIsLoading(false);
             setUsers(filter);
             setSearch(search);
+            setPage(1);
         } else {
             setUsers(usersTemp)
         }

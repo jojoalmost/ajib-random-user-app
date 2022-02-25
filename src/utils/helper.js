@@ -13,3 +13,11 @@ export const reformatUserData = (users = []) => users.map(user => ({
     name: getFullName(user.name),
     username: user.login.username,
 }));
+
+export const filterUserData = (key = '', users = []) => {
+    const query = key.toLocaleLowerCase();
+    return users.filter(user =>
+        String(user.username).toLowerCase().indexOf(query) !== -1 ||
+        String(user.name).toLowerCase().indexOf(query) !== -1 ||
+        String(user.email).toLowerCase().indexOf(query) !== -1);
+}
