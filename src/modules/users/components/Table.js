@@ -4,11 +4,16 @@ import React from "react";
 import styled from "styled-components";
 import useSortableData from "../../../utils/hooks/useSortableData";
 import {formatDate} from "../../../utils/helper";
+import {useUserList} from "../../../utils/context/UsersProvider";
 
-const Table = ({isLoading, data: users, page, changePage, isSearching}) => {
+const Table = () => {
+    const {isLoading, users, info: {page}, onChangePage, search} = useUserList();
+
     const {data, requestSort: onSort, sortBy, sortDirection} = useSortableData(users);
     const isSort = (key) => key ? sortBy === key : false;
     const headers = [COLUMNS_NAME.USERNAME, COLUMNS_NAME.NAME, COLUMNS_NAME.EMAIL, COLUMNS_NAME.GENDER, COLUMNS_NAME.REGISTERED];
+
+    const isSearching = !!search.trim();
     return (
         <TableWrapper>
             <thead>
@@ -65,11 +70,11 @@ const Table = ({isLoading, data: users, page, changePage, isSearching}) => {
                     )}
                 </td>
                 <td className="action">
-                    <Button onClick={() => changePage(page - 1)}
+                    <Button onClick={() => onChangePage(page - 1)}
                             disabled={page === 1 || users.length === 0 || isSearching}>
                         Prev
                     </Button>
-                    <Button onClick={() => changePage(page + 1)} disabled={users.length === 0 || isSearching}>
+                    <Button onClick={() => onChangePage(page + 1)} disabled={users.length === 0 || isSearching}>
                         Next
                     </Button>
                 </td>

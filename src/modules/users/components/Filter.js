@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import {InputSearch, SelectGender} from "./index";
+import {useUserList} from "../../../utils/context/UsersProvider";
 
-const Filter = ({onChangeSearch, onChangeGender}) => {
+const Filter = () => {
+    const {onSearch, onFilterGender} = useUserList()
     return (
         <Wrapper>
-            <InputSearch onChange={onChangeSearch}/>
-            <SelectGender onChange={onChangeGender}/>
+            <InputSearch onChange={onSearch}/>
+            <SelectGender onChange={onFilterGender}/>
         </Wrapper>
     )
 }
