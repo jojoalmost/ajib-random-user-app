@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import api from "../../utils/api/api";
-import Filter from "./components/Filter";
 import {reformatUserData} from "../../utils/helper";
-import Table from "./components/Table";
+import {Filter, Table} from "./components";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -15,6 +14,8 @@ const Users = () => {
     });
     const [isLoading, setIsLoading] = useState(false);
 
+    let timer;
+
     const fetchData = () => {
         setIsLoading(true);
         api.get('/', {
@@ -23,6 +24,7 @@ const Users = () => {
                 page,
                 inc: ['cell', 'login', 'name', 'email', 'gender', 'registered'].join(','),
                 ...(gender && {gender}),
+                ...(search && {query: search}),
             }
         }).then(res => {
             const {results, info} = res;
@@ -45,13 +47,21 @@ const Users = () => {
         setGender(gender);
     }
 
+    const debounceSearchChange = (search = '') => {
+        clearTimeout(timer);
+        timer = setTimeout(() => handleChangeSearch(search), 1000);
+    }
+
     const handleChangeSearch = (search = '') => {
         if (search.trim()) {
+            setIsLoading(true);
             const key = search.toLowerCase();
             const filter = usersTemp.filter(user => String(user.username).toLowerCase().indexOf(key) !== -1 ||
                 String(user.name).toLowerCase().indexOf(key) !== -1 ||
                 String(user.email).toLowerCase().indexOf(key) !== -1);
+            setIsLoading(false);
             setUsers(filter);
+            setSearch(search);
         } else {
             setUsers(usersTemp)
         }
@@ -60,7 +70,7 @@ const Users = () => {
     return (
         <div>
             <h1>List of users</h1>
-            <Filter onChangeSearch={handleChangeSearch} onChangeGender={handleChangeGender}/>
+            <Filter onChangeSearch={debounceSearchChange} onChangeGender={handleChangeGender}/>
             <div>
                 <Table
                     page={info.page}

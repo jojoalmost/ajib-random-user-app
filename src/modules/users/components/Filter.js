@@ -1,7 +1,6 @@
 import React from "react";
-import InputSearch from "./InputSearch";
-import SelectGender from "./SelectGender";
 import styled from "styled-components";
+import {InputSearch, SelectGender} from "./index";
 
 const Filter = ({onChangeSearch, onChangeGender}) => {
     return (

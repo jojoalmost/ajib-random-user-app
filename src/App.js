@@ -1,14 +1,17 @@
 import './App.css';
-import Users from "./modules/users/Users";
+import React from "react";
 import Header from "./components/layout/Header";
 import MainContent from "./components/layout/MainContent";
 
 function App() {
+    const Users = React.lazy(() => import("./modules/users/Users"));
     return (
         <div className="App">
             <Header/>
             <MainContent>
-                <Users/>
+                <React.Suspense fallback={<div>Loading...</div>}>
+                    <Users/>
+                </React.Suspense>
             </MainContent>
         </div>
     );

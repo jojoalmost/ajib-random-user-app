@@ -14,7 +14,7 @@ const Table = ({isLoading, data: users, page, changePage}) => {
             <thead>
             <tr>
                 {headers.map(header => (
-                    <th>
+                    <th key={header}>
                         <button
                             onClick={() => onSort(header)}>
                             {header}
@@ -60,7 +60,9 @@ const Table = ({isLoading, data: users, page, changePage}) => {
             <tfoot>
             <tr>
                 <td colSpan={4} className="info">
-                    Page : {page}
+                    {!isLoading && (
+                        <div>Page : {page}</div>
+                    )}
                 </td>
                 <td className="action">
                     <Button onClick={() => changePage(page - 1)}
