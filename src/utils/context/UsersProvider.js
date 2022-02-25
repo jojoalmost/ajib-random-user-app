@@ -77,7 +77,7 @@ const UserListProvider = ({children}) => {
                 isLoading,
                 info,
                 search,
-                onSearch: (query) => handleChangeSearch(query),
+                onSearch: (query) => debounceSearchChange(query),
                 onFilterGender: (gender) => handleChangeGender(gender),
                 onChangePage: (page) => handleChangePage(page),
             }
