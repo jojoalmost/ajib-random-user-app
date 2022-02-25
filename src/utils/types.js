@@ -1,9 +1,9 @@
 export const COLUMNS_NAME = {
-    USERNAME: 'USERNAME',
-    NAME: 'NAME',
-    EMAIL: 'EMAIL',
-    GENDER: 'GENDER',
-    REGISTERED: 'REGISTERED',
+    USERNAME: 'username',
+    NAME: 'name',
+    EMAIL: 'email',
+    GENDER: 'gender',
+    REGISTERED: 'registered',
 }
 
 export const SORT_ORDER = {

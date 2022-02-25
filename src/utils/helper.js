@@ -1,10 +1,15 @@
-const getUserName = (name) => {
+const getFullName = (name) => {
     const {title, ...other} = name;
     return Object.values(other).join(' ');
 }
 
+export const formatDate = date => {
+    return new Date(date).toLocaleString("id-ID");
+}
+
 export const reformatUserData = (users = []) => users.map(user => ({
     ...user,
-    registered: new Date(user.registered.date).toLocaleString(),
-    name: getUserName(user.name),
+    registered: user.registered.date,
+    name: getFullName(user.name),
+    username: user.login.username,
 }));
